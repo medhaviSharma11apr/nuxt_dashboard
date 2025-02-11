@@ -7,7 +7,7 @@ const open = ref(false)
 
         <div class=" z-50 flex lg:hidden  items-center justify-between w-full p-full p-4">
             <Logo></Logo>
-            <Icon class="z-50 cursor-pointer left-2 top-2 " size="50" name="iconamoon:menu-burger-horizontal"
+            <Icon class="z-50 cursor-pointer left-2 top-0  " size="50" name="iconamoon:menu-burger-horizontal"
                 @click="open = !open"></Icon>
 
             <div class="absolute top-0 left-0 w-full h-full h-screen bg-white " v-show="open">

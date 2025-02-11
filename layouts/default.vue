@@ -4,11 +4,11 @@
 </script>
 
 <template>
-    <div class="grid items-start
-    ">
-        <!-- <SidebarMenu></SidebarMenu>
-        <Sidebar></Sidebar> -->
-        <div>
+    <div class="grid items-start lg:flex">
+    <Sidebar></Sidebar>
+    
+        <div class="p-8 w-full"
+        >
             <slot />
         </div>
     </div>
