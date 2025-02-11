@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden rounded-lg w-[45px]">
-    <Logo></Logo>
+  <div class=" rounded-lg w-[1145px]">
+    <Sidebar></Sidebar>
   </div>
 </template>

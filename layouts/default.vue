@@ -6,8 +6,8 @@
 <template>
     <div class="flex items-start
     ">
-        <SidebarMenu></SidebarMenu>
-        <Sidebar></Sidebar>
+        <!-- <SidebarMenu></SidebarMenu>
+        <Sidebar></Sidebar> -->
         <div>
             <slot />
         </div>

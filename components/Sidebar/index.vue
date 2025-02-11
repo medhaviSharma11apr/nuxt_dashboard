@@ -4,7 +4,12 @@ const loading= ref(false)
 
 <template>
 <div class="relative">
-    <div>Mobile SideBar</div>
-    <div>Desktop SideBar</div>
+    
+ <div class=" flex lg:hidden ">
+        <SidebarMenu></SidebarMenu>
+    </div>
+    <div class="hidden lg:flex ">
+           <SidebarMenu></SidebarMenu>
+    </div> 
 </div>
 </template>
