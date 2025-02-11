@@ -20,7 +20,7 @@ const open = ref(false)
         <div class="hidden lg:flex w-[250px] h-screen flex flex-col justify-between border-r ">
             <SidebarMenu></SidebarMenu>
             <div>
-                User Items
+                user 
             </div>
         </div>
     </div>
