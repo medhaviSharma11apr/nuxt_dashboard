@@ -33,8 +33,8 @@ const loading = ref(false)
         </CardContent>
 
         <CardFooter class="flex gap-2 py-2  px-2 item-center justify-between">
-            <div>
-                     <Icon class=" " size="20" :name="card.icon"
+            <div class="w-8 h-8 bg-neutral-100 rounded flex items-center justify-center">
+                     <Icon class=" " size="20" :name="card.icon" color="black"
                ></Icon>
             </div>
             <p class="text-xs grow">

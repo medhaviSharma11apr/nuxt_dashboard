@@ -1,5 +1,6 @@
 <script setup>
 import { TabsContent } from 'radix-vue';
+
 const list = [
   {
     title: "Today",
@@ -152,7 +153,7 @@ const cards = [
   amount : 1244.440,
   label:"View sale",
   description: "Sale of march-2014",
-  icon :"solar:ticket-sale-online"
+  icon :"solar:ticket-sale-outline"
 },
   {
   title:"Refunds",
@@ -181,10 +182,12 @@ const cards = [
         <p> Hi welcome back Deepak ! </p>
         <h1>Dash Board</h1>
       </div>
+      
+      <ProductNew></ProductNew>
 
-      <div class="bg-neutral-200 h-[120px] w-[120px]">
+      <!-- <div class="bg-neutral-200 h-[120px] w-[120px]"> -->
 
-      </div>
+      <!-- </div> -->
 
     </header>
     <main class="grid gap-2">
@@ -224,8 +227,8 @@ const cards = [
     <footer>
       <!-- I will have 3 different cards -->
       <!-- <div class="flex item-center gap-3"> -->
-      <div class="grid lg:grid-cols-3 gap-4 mb-2">
-        <Card v-for="(item, index) in cards" :card="item" :key="item" class=""></Card>
+      <div class="grid lg:grid-cols-3 gap-4 mb-4">
+        <MyCard v-for="(item, index) in cards" :card="item" :key="item" class=""></MyCard>
       </div>
     </footer>
   </div>
