@@ -1,71 +1,117 @@
 <script setup>
 import { TabsContent } from 'radix-vue';
 
+
+function generateRandomData(number =7){
+let values =[]  
+for(let i=0 ; i< number +1 ; i++){
+  values.push(Math.floor(Math.random() *100 ))
+}
+console.log(values);
+data.value= values;
+return values;
+}
+
+onMounted(() => {
+  generateRandomData();
+});
+
 const loading = ref(false);
 
-const list =[
+const list = [
   {
-    title:"Today",
-    component:"<div>Today</div>"
+    title: "Today",
+    component: "<div>Today</div>"
   },
-   {
-    title:"This week",
-    component:"<div>This week</div>"
+  {
+    title: "This week",
+    component: "<div>This week</div>"
   },
-   {
-    title:"This month",
-    component:"<div>This month</div>"
+  {
+    title: "This month",
+    component: "<div>This month</div>"
   },
-   {
-    title:"This year",
-    component:"<div>This year</div>"
+  {
+    title: "This year",
+    component: "<div>This year</div>"
   },
-  
+
 ];
-const options = computed(()=>({
-    chart: {
-        type: 'line'
-    },
+let data= ref([])
+// let data = ref([
+//       16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
+//       22.0, 17.8
+//     ]);
+let categories = ref({
+  'today': [],
+  'week': [],
+  'month': [],
+  'year': [],
+
+});
+let currentCategory = ref([
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+  'Oct', 'Nov', 'Dec'
+],);
+const options = computed(() => ({
+  chart: {
+    type: 'line',
+    animation: {
+      enabled: false,
+    }
+  },
+  title: {
+    text: ''
+  },
+  legend:{
+  enabled:false,  
+  },
+
+  xAxis: {
+    gridLineColor: 'transparent',
+    categories: currentCategory.value
+  },
+  yAxis: {
+    gridLineColor: 'transparent',
     title: {
-        text: 'Monthly Average Temperature'
+      text: ''
+    }
+  },
+  plotOptions: {
+    line: {
+      marker: {
+        enabled: false,
+      },
+      dataLabels: {
+        enabled: true
+      },
+      enableMouseTracking: true
+    }
+  },
+  series: [{
+    lineWidth: '4px',
+    color: {
+      linearGradient: {
+
+      },
+      stops: [
+        [0, 'rgba(252, 176,69, 1)'],
+        [0.33, 'rgba(253, 29,29, 1)'],
+        [0.66, 'rgba(131,58,180, 1)'],
+        [1, 'rgba(29, 217,59, 1)'],
+      ]
     },
-    subtitle: {
-        text: 'Source: ' +
-            '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
-            'target="_blank">Wikipedia.com</a>'
-    },
-    xAxis: {
-        categories: [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec'
-        ]
-    },
-    yAxis: {
-        title: {
-            text: 'Temperature (°C)'
-        }
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
-    },
-    series: [{
-        name: 'Reggane',
-        data: [
-            16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
-            22.0, 17.8
-        ]
-    }, {
-        name: 'Tallinn',
-        data: [
-            -2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
-            2.0, -0.9
-        ]
-    }]
+    name: 'Reggane',
+    data: data.value
+  },
+    // {
+    //   name: 'Tallinn',
+    //   data: [
+    //     -2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
+    //     2.0, -0.9
+    //   ]
+    // }
+  ]
 })
 
 
@@ -88,18 +134,18 @@ const options = computed(()=>({
     </header>
     <main class="grid gap-2">
       <div class="trial">
-        <Tabs default-value="today" class="w-[400px]">
-          <TabsList>
-            <TabsTrigger v-for="(item , index) in list" :key="index" :value="item.title">
-            {{ item.title }}
+        <Tabs default-value="Today" >
+          <TabsList class="max-w-[400px]">
+            <TabsTrigger v-for="(item, index) in list" :key="index" :value="item.title">
+              {{ item.title }}
             </TabsTrigger>
           </TabsList>
-          <TabsContent v-for="(item , index) in list" :key="index" :value="item.title">
+          <TabsContent v-for="(item, index) in list" :key="index" :value="item.title">
             <!-- {{ item.component }} -->
-              <highchart :options="options" />
+            <highchart :options="options" />
           </TabsContent>
-         
-        
+
+
         </Tabs>
       </div>
 
