@@ -1,58 +1,88 @@
 <script setup>
 import { TabsContent } from 'radix-vue';
-
-
-function generateRandomData(number =7){
-let values =[]  
-for(let i=0 ; i< number +1 ; i++){
-  values.push(Math.floor(Math.random() *100 ))
-}
-console.log(values);
-data.value= values;
-return values;
-}
-
-onMounted(() => {
-  generateRandomData();
-});
-
-const loading = ref(false);
-
 const list = [
   {
     title: "Today",
     component: "<div>Today</div>"
   },
   {
-    title: "This week",
+    title: "Week",
     component: "<div>This week</div>"
   },
   {
-    title: "This month",
+    title: "Month",
     component: "<div>This month</div>"
   },
   {
-    title: "This year",
+    title: "Year",
     component: "<div>This year</div>"
   },
 
 ];
-let data= ref([])
-// let data = ref([
-//       16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
-//       22.0, 17.8
-//     ]);
+
+let currentCategory = ref
+  ('today');
+let data = ref([])
+function generateRandomData(number=24) {
+  let values = []
+  for (let i = 0; i < number ; i++) {
+    values.push(Math.floor(Math.random() * 100))
+  }
+  console.log(values);
+  data.value = values;
+
+  return values;
+}
+
+onMounted(() => {
+  generateRandomData();
+});
+
+
+
+const setCategory = (e) => {
+  console.log('e', e)
+  let v = e.target.innerText.toLowerCase();
+
+  currentCategory.value = v;
+      console.log('v', v)
+
+  switch (v) {
+    case 'today':
+      console.log('v-t', v)
+      generateRandomData(24);
+    case 'week':
+      generateRandomData(7);
+    case 'month':
+      generateRandomData(30);
+    case 'year':
+      generateRandomData(12);
+    default :
+  }
+
+
+
+
+}
+
+
+
 let categories = ref({
-  'today': [],
-  'week': [],
-  'month': [],
-  'year': [],
+  today: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00',
+    '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00',
+    '20:00', '21:00', '22:00', '23:00'],
+  week: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  month: [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ],
+  year: [
+      "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ],
 
 });
-let currentCategory = ref([
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-  'Oct', 'Nov', 'Dec'
-],);
+
 const options = computed(() => ({
   chart: {
     type: 'line',
@@ -63,13 +93,14 @@ const options = computed(() => ({
   title: {
     text: ''
   },
-  legend:{
-  enabled:false,  
+  legend: {
+    enabled: false,
   },
 
   xAxis: {
     gridLineColor: 'transparent',
-    categories: currentCategory.value
+    // categories: currentCategory.value
+    categories: categories.value[currentCategory.value]
   },
   yAxis: {
     gridLineColor: 'transparent',
@@ -104,19 +135,43 @@ const options = computed(() => ({
     name: 'Reggane',
     data: data.value
   },
-    // {
-    //   name: 'Tallinn',
-    //   data: [
-    //     -2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
-    //     2.0, -0.9
-    //   ]
-    // }
+
   ]
 })
 
 
 
 )
+
+// cards 
+
+const card = [
+  {
+  title:"Sales",
+  progressions : 12,
+  amount : 1244.440,
+  label:"View sale",
+  description: "Sale of march-2014",
+  icon :"solar:ticket-sale-online"
+},
+  {
+  title:"Refunds",
+  progressions : 8,
+  amount : 84.440,
+  label:"View refuds",
+  description: "Refunds since begining of the year",
+  icon :"heroicons-outline:receipt-refund"
+},
+  {
+  title:"Payouts",
+  progressions : 14,
+  amount : 899.99,
+  label:"View payouts",
+  description: "Payouts of this week",
+  icon :"tabler:zoom-money"
+},
+
+]
 </script>
 
 <template>
@@ -134,15 +189,17 @@ const options = computed(() => ({
     </header>
     <main class="grid gap-2">
       <div class="trial">
-        <Tabs default-value="Today" >
-          <TabsList class="max-w-[400px]">
+        <Tabs default-value="Today" @click="setCategory">
+          <TabsList class="max-w-[400px] m-2">
             <TabsTrigger v-for="(item, index) in list" :key="index" :value="item.title">
               {{ item.title }}
             </TabsTrigger>
           </TabsList>
           <TabsContent v-for="(item, index) in list" :key="index" :value="item.title">
-            <!-- {{ item.component }} -->
-            <highchart :options="options" />
+             <div class="border p-4 rounded-lg ">
+               <highchart :options="options" />
+             </div>
+           
           </TabsContent>
 
 
