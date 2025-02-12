@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true }
   ,
 
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt' , '@nuxt/icon'],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt' , '@nuxt/icon',  'nuxt-highcharts',],
   shadcn: {
     /**
      * Prefix for all the imported component
