@@ -28,7 +28,7 @@ function generateRandomData(number=24) {
   for (let i = 0; i < number ; i++) {
     values.push(Math.floor(Math.random() * 100))
   }
-  console.log(values);
+  // console.log(values);
   data.value = values;
 
   return values;
@@ -41,15 +41,15 @@ onMounted(() => {
 
 
 const setCategory = (e) => {
-  console.log('e', e)
+  // console.log('e', e)
   let v = e.target.innerText.toLowerCase();
 
   currentCategory.value = v;
-      console.log('v', v)
+      // console.log('v', v)
 
   switch (v) {
     case 'today':
-      console.log('v-t', v)
+      // console.log('v-t', v)
       generateRandomData(24);
     case 'week':
       generateRandomData(7);
@@ -145,7 +145,7 @@ const options = computed(() => ({
 
 // cards 
 
-const card = [
+const cards = [
   {
   title:"Sales",
   progressions : 12,
@@ -211,20 +211,21 @@ const card = [
 
 
       </div> -->
-      <section>
+      <!-- <section>
         <div class="w-full h-[360px] bg-neutral-200">sect</div>
-      </section>
+      </section> -->
 
 
 
 
-      >
+      
 
     </main>
     <footer>
       <!-- I will have 3 different cards -->
-      <div class="flex item-center gap-3">
-        <div v-for="(item, index) in 3" :key="index" class="w-full h-[300px] bg-neutral-200"></div>
+      <!-- <div class="flex item-center gap-3"> -->
+      <div class="grid lg:grid-cols-3 gap-4 mb-2">
+        <Card v-for="(item, index) in cards" :card="item" :key="item" class=""></Card>
       </div>
     </footer>
   </div>
